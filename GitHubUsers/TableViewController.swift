@@ -11,7 +11,7 @@ import UIKit
 class TableViewController: UITableViewController {
     
     var arrayOfUsers = [GitHubUser]()
-    let gitHubUsersURL = "https://api.github.com/users"
+    let gitHubUsersURL = "https://api.github.com/users?per_page=100"
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -56,31 +56,31 @@ class TableViewController: UITableViewController {
             
             //Parsing
             if let data = data {
-                self.arrayOfUsers = self.parseJsonData(data)
-                
-                NSOperationQueue.mainQueue().addOperationWithBlock({
-                    self.tableView.reloadData()
-                })
+                self.parseJsonData(data)
             }
             
         }
         task.resume()
     }
     
-    func parseJsonData(data: NSData) -> [GitHubUser] {
-        var users = [GitHubUser]()
+    func parseJsonData(data: NSData) {
+        if !arrayOfUsers.isEmpty {
+            return
+        }
+        
         do {
             let jsonResult = try NSJSONSerialization.JSONObjectWithData(data, options: NSJSONReadingOptions.MutableContainers)
             let jsonArray = jsonResult as! [AnyObject]
             for jsonElement in jsonArray {
                 let user = GitHubUser(jsonElement as! [String : AnyObject])
-                users.append(user)
+                arrayOfUsers.append(user)
+                dispatch_async(dispatch_get_main_queue()) {
+                    self.tableView.reloadData()
+                }
             }
         } catch {
             print(error)
         }
-        
-        return users
     }
 
 }

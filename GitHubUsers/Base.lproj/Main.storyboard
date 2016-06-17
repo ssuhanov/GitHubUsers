@@ -62,6 +62,7 @@
                                     </constraints>
                                 </tableViewCellContentView>
                                 <connections>
+                                    <outlet property="avatarImageView" destination="cJH-WH-JSX" id="10Q-Gr-pPu"/>
                                     <outlet property="loginLabel" destination="ukA-ry-ev7" id="faV-7u-ATP"/>
                                     <outlet property="profileLinkButton" destination="3sr-rv-8WU" id="TiE-3h-id4"/>
                                 </connections>

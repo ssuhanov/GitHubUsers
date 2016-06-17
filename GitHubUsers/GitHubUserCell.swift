@@ -14,6 +14,7 @@ class GitHubUserCell: UITableViewCell {
 
     @IBOutlet weak var loginLabel: UILabel!
     @IBOutlet weak var profileLinkButton: UIButton!
+    @IBOutlet weak var avatarImageView: UIImageView!
     
     override func awakeFromNib() {
         super.awakeFromNib()
@@ -30,7 +31,9 @@ class GitHubUserCell: UITableViewCell {
         if let user = user {
             loginLabel.text = user.login
             profileLinkButton.setTitle(user.profileLink, forState: .Normal)
-            //images
+            if let avatar = user.avatar {
+                avatarImageView.image = avatar
+            }
         }
     }
 

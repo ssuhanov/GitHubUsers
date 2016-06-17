@@ -12,11 +12,16 @@ import UIKit
 class GitHubUser {
     var login: String
     var profileLink: String
-//    var avatarPreview: UIImage = UIImage()
-//    var avatar: UIImage = UIImage()
+    var avatar: UIImage?
     
     init(_ jsonDictionary: [String : AnyObject]) {
         self.login = jsonDictionary["login"] as! String
         self.profileLink = jsonDictionary["html_url"] as! String
+        
+        guard let avatarURL = NSURL(string: jsonDictionary["avatar_url"] as! String),
+            let avatarData = NSData(contentsOfURL: avatarURL) else {
+                return
+        }
+        self.avatar = UIImage(data: avatarData)
     }
 }
