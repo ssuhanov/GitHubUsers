@@ -48,8 +48,9 @@ class TableViewController: UITableViewController {
                 return
         }
         
-        let avatarVC = segue.destinationViewController as! AvatarViewController
-        avatarVC.user = arrayOfUsers[tag]
+        if let avatarVC = segue.destinationViewController as? AvatarViewController {
+            avatarVC.user = arrayOfUsers[tag]
+        }
     }
     
     // MARK: - Getting data from URL
@@ -78,12 +79,13 @@ class TableViewController: UITableViewController {
         
         do {
             let jsonResult = try NSJSONSerialization.JSONObjectWithData(data, options: NSJSONReadingOptions.MutableContainers)
-            let jsonArray = jsonResult as! [AnyObject]
-            for jsonElement in jsonArray {
-                let user = GitHubUser(jsonDictionary: jsonElement as! [String : AnyObject])
-                arrayOfUsers.append(user)
-                dispatch_async(dispatch_get_main_queue()) {
-                    self.tableView.reloadData()
+            if let jsonArray = jsonResult as? [[String : AnyObject]] {
+                for jsonElement in jsonArray {
+                    let user = GitHubUser(jsonDictionary: jsonElement)
+                    arrayOfUsers.append(user)
+                    dispatch_async(dispatch_get_main_queue()) {
+                        self.tableView.reloadData()
+                    }
                 }
             }
         } catch {
