@@ -16,8 +16,6 @@ class TableViewController: UITableViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         navigationItem.title = "GitHub users"
-        
-        //fetch array of users
         getUsers()
     }
 
@@ -27,7 +25,6 @@ class TableViewController: UITableViewController {
     }
 
     override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        // #warning Incomplete implementation, return the number of rows
         return arrayOfUsers.count
     }
     
@@ -35,13 +32,24 @@ class TableViewController: UITableViewController {
         let cell = tableView.dequeueReusableCellWithIdentifier("cell", forIndexPath: indexPath) as! GitHubUserCell
         let user = arrayOfUsers[indexPath.row]
         cell.user = user
-        cell.configureCellForUser()
+        cell.configureCellForRow(indexPath.row)
 
         return cell
     }
     
     override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
         tableView.deselectRowAtIndexPath(indexPath, animated: true)
+    }
+    
+    // MARK: - Navigation
+    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
+        guard segue.identifier == "showAvatar",
+            let tag = sender?.tag else {
+                return
+        }
+        
+        let avatarVC = segue.destinationViewController as! AvatarViewController
+        avatarVC.user = arrayOfUsers[tag]
     }
     
     // MARK: - Getting data from URL
@@ -65,14 +73,14 @@ class TableViewController: UITableViewController {
     
     func parseJsonData(data: NSData) {
         if !arrayOfUsers.isEmpty {
-            return
+            arrayOfUsers = [GitHubUser]()
         }
         
         do {
             let jsonResult = try NSJSONSerialization.JSONObjectWithData(data, options: NSJSONReadingOptions.MutableContainers)
             let jsonArray = jsonResult as! [AnyObject]
             for jsonElement in jsonArray {
-                let user = GitHubUser(jsonElement as! [String : AnyObject])
+                let user = GitHubUser(jsonDictionary: jsonElement as! [String : AnyObject])
                 arrayOfUsers.append(user)
                 dispatch_async(dispatch_get_main_queue()) {
                     self.tableView.reloadData()

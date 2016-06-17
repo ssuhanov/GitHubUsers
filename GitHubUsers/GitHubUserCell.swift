@@ -14,7 +14,7 @@ class GitHubUserCell: UITableViewCell {
 
     @IBOutlet weak var loginLabel: UILabel!
     @IBOutlet weak var profileLinkButton: UIButton!
-    @IBOutlet weak var avatarImageView: UIImageView!
+    @IBOutlet weak var avatarButton: UIButton!
     
     override func awakeFromNib() {
         super.awakeFromNib()
@@ -27,12 +27,13 @@ class GitHubUserCell: UITableViewCell {
         // Configure the view for the selected state
     }
     
-    func configureCellForUser() {
+    func configureCellForRow(rowNumber: Int) {
         if let user = user {
             loginLabel.text = user.login
             profileLinkButton.setTitle(user.profileLink, forState: .Normal)
+            avatarButton.tag = rowNumber
             if let avatar = user.avatar {
-                avatarImageView.image = avatar
+                avatarButton.setImage(avatar, forState: .Normal)
             }
         }
     }
@@ -44,4 +45,5 @@ class GitHubUserCell: UITableViewCell {
             }
         }
     }
+    
 }

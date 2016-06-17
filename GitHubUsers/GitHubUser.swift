@@ -14,7 +14,7 @@ class GitHubUser {
     var profileLink: String
     var avatar: UIImage?
     
-    init(_ jsonDictionary: [String : AnyObject]) {
+    init(jsonDictionary: [String : AnyObject]) {
         self.login = jsonDictionary["login"] as! String
         self.profileLink = jsonDictionary["html_url"] as! String
         

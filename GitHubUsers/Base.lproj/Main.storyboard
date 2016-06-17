@@ -22,13 +22,6 @@
                                     <rect key="frame" x="0.0" y="0.0" width="600" height="116"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
-                                        <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="cJH-WH-JSX">
-                                            <rect key="frame" x="8" y="8" width="100" height="100"/>
-                                            <constraints>
-                                                <constraint firstAttribute="width" constant="100" id="dm8-o4-wN7"/>
-                                                <constraint firstAttribute="height" constant="100" id="mhA-KI-bPt"/>
-                                            </constraints>
-                                        </imageView>
                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ukA-ry-ev7">
                                             <rect key="frame" x="116" y="28" width="476" height="21"/>
                                             <constraints>
@@ -49,20 +42,30 @@
                                                 <action selector="profileLinkButtonPressed:" destination="h1U-kD-Gyi" eventType="touchUpInside" id="81E-De-Mtb"/>
                                             </connections>
                                         </button>
+                                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="3m4-gx-ae8">
+                                            <rect key="frame" x="8" y="8" width="100" height="100"/>
+                                            <constraints>
+                                                <constraint firstAttribute="width" constant="100" id="Mej-4o-dAM"/>
+                                                <constraint firstAttribute="height" constant="100" id="Mtq-af-ikR"/>
+                                            </constraints>
+                                            <connections>
+                                                <segue destination="Hqf-vK-9JC" kind="show" identifier="showAvatar" id="Apw-2X-3CW"/>
+                                            </connections>
+                                        </button>
                                     </subviews>
                                     <constraints>
-                                        <constraint firstItem="cJH-WH-JSX" firstAttribute="top" secondItem="5gs-oQ-P7D" secondAttribute="topMargin" id="EYO-Sy-vg0"/>
+                                        <constraint firstItem="3sr-rv-8WU" firstAttribute="leading" secondItem="3m4-gx-ae8" secondAttribute="trailing" constant="8" id="8aU-Am-8pg"/>
                                         <constraint firstItem="ukA-ry-ev7" firstAttribute="trailing" secondItem="5gs-oQ-P7D" secondAttribute="trailingMargin" id="HzU-KW-fgj"/>
                                         <constraint firstItem="ukA-ry-ev7" firstAttribute="top" secondItem="5gs-oQ-P7D" secondAttribute="topMargin" constant="20" id="OOo-Wh-A6M"/>
-                                        <constraint firstItem="ukA-ry-ev7" firstAttribute="leading" secondItem="cJH-WH-JSX" secondAttribute="trailing" constant="8" id="Tb7-X0-ex7"/>
+                                        <constraint firstItem="3m4-gx-ae8" firstAttribute="leading" secondItem="5gs-oQ-P7D" secondAttribute="leadingMargin" id="QTG-MX-HFy"/>
+                                        <constraint firstItem="ukA-ry-ev7" firstAttribute="leading" secondItem="3m4-gx-ae8" secondAttribute="trailing" constant="8" id="SlA-rw-MRn"/>
                                         <constraint firstItem="3sr-rv-8WU" firstAttribute="trailing" secondItem="5gs-oQ-P7D" secondAttribute="trailingMargin" id="ZLv-KM-qi7"/>
-                                        <constraint firstItem="3sr-rv-8WU" firstAttribute="leading" secondItem="cJH-WH-JSX" secondAttribute="trailing" constant="8" id="bZj-mZ-yIZ"/>
-                                        <constraint firstItem="cJH-WH-JSX" firstAttribute="leading" secondItem="5gs-oQ-P7D" secondAttribute="leadingMargin" id="irN-YQ-vwO"/>
+                                        <constraint firstItem="3m4-gx-ae8" firstAttribute="top" secondItem="5gs-oQ-P7D" secondAttribute="topMargin" id="fGq-RE-wEv"/>
                                         <constraint firstAttribute="bottomMargin" secondItem="3sr-rv-8WU" secondAttribute="bottom" constant="20" id="uTf-mz-vQe"/>
                                     </constraints>
                                 </tableViewCellContentView>
                                 <connections>
-                                    <outlet property="avatarImageView" destination="cJH-WH-JSX" id="10Q-Gr-pPu"/>
+                                    <outlet property="avatarButton" destination="3m4-gx-ae8" id="Q7l-cZ-kj3"/>
                                     <outlet property="loginLabel" destination="ukA-ry-ev7" id="faV-7u-ATP"/>
                                     <outlet property="profileLinkButton" destination="3sr-rv-8WU" id="TiE-3h-id4"/>
                                 </connections>
@@ -78,6 +81,40 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="bKm-x8-dPA" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="1190" y="278"/>
+        </scene>
+        <!--Avatar View Controller-->
+        <scene sceneID="Zsb-3Z-JvN">
+            <objects>
+                <viewController id="Hqf-vK-9JC" customClass="AvatarViewController" customModule="GitHubUsers" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="jNS-7p-29C"/>
+                        <viewControllerLayoutGuide type="bottom" id="k24-bq-yy6"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="2Hf-lF-T64">
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="G4M-HY-fLX">
+                                <rect key="frame" x="100" y="100" width="400" height="400"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="400" id="MFV-Uy-fn1"/>
+                                    <constraint firstAttribute="height" constant="400" id="omJ-hz-5Vd"/>
+                                </constraints>
+                            </imageView>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="G4M-HY-fLX" firstAttribute="centerY" secondItem="2Hf-lF-T64" secondAttribute="centerY" id="FlO-Vr-dM7"/>
+                            <constraint firstItem="G4M-HY-fLX" firstAttribute="centerX" secondItem="2Hf-lF-T64" secondAttribute="centerX" id="dNG-Wm-vj1"/>
+                        </constraints>
+                    </view>
+                    <connections>
+                        <outlet property="avatarImageView" destination="G4M-HY-fLX" id="LgA-4R-85G"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="G5n-md-pop" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1896" y="278"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="TzV-pQ-YnP">
