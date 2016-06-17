@@ -10,8 +10,13 @@ import Foundation
 import UIKit
 
 class GitHubUser {
-    var login: String = ""
-    var profileLink: String = ""
+    var login: String
+    var profileLink: String
 //    var avatarPreview: UIImage = UIImage()
 //    var avatar: UIImage = UIImage()
+    
+    init(_ jsonDictionary: [String : AnyObject]) {
+        self.login = jsonDictionary["login"] as! String
+        self.profileLink = jsonDictionary["html_url"] as! String
+    }
 }
